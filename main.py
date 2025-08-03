@@ -61,7 +61,7 @@ def main():
         # Stream the response in real-time
         # This shows the AI's response as it's being generated
         for token, metadata in rag_agent.stream(
-            input={"query": user_query},
+            input={"query": user_query, "role": "Manager"},
             stream_mode="messages",
             config={"configurable": {"thread_id": thread_id}},
         ):

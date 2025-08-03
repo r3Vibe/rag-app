@@ -7,10 +7,7 @@ retrieves relevant documents based on user queries and uses them to generate
 informed responses.
 """
 
-from langchain_core.messages import (
-    HumanMessage,
-    SystemMessage,
-)
+from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import StateGraph
 
@@ -99,6 +96,14 @@ def create_rag_agent():
             You are to only use the context provided and not any external knowledge.
             If the query is not related to the context do not have to provide any citation.
             In the citation only use the pdf file name and the page number.
+            The citation format should be like this:
+            **Citations**
+            [file_name.pdf, page_number]
+
+            Only answer the questions if the user role is Manager.
+            Any other role just tell them that you can only answer questions from the Manager.
+
+            Current User Role: {state["role"]}
             """
         )
 
