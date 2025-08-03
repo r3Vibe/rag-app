@@ -39,6 +39,7 @@ def load_pdf_files():
         This function will overwrite any existing vector store with the
         complete set of documents from the folder.
     """
+    print("Processing PDF files...")
     folder = "documents"  # Directory containing PDF files to process
     all_docs = os.listdir(folder)  # Get list of all files in the directory
 
@@ -53,13 +54,15 @@ def load_pdf_files():
     # Process each document in the folder
     for doc in all_docs:
         """Load each PDF file and add its content to the vector store."""
+        print(f"Processing {doc}...")
         file_path = os.path.join(folder, doc)  # Construct full file path
         pdf_data = PyPDFLoader(file_path)  # Initialize PDF loader
         documents = pdf_data.load()  # Extract text content and metadata
         vector_store.add_documents(documents)  # Add document chunks to vector store
-
+    print("All documents processed. Saving vector store...")
     # Persist the updated vector store to disk
     vector_store.save_local("context_index")
+    print("Vector store saved successfully.")
 
 
 def load_given_pdf(pdf_file):

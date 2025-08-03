@@ -6,6 +6,10 @@ the RAG agent. Users can ask questions and receive answers based on the
 indexed document collection.
 """
 
+import uuid
+
+from langchain_core.messages import AIMessageChunk
+
 from graph import create_rag_agent
 
 
@@ -43,6 +47,8 @@ def main():
     # Initialize the RAG agent with the compiled workflow
     rag_agent = create_rag_agent()
 
+    thread_id = uuid.uuid4().hex  # Generate a unique thread ID for the conversation
+
     # Start the interactive conversation loop
     while True:
         # Get user input with clear instructions
@@ -55,10 +61,13 @@ def main():
         # Stream the response in real-time
         # This shows the AI's response as it's being generated
         for token, metadata in rag_agent.stream(
-            input={"query": user_query}, stream_mode="messages"
+            input={"query": user_query},
+            stream_mode="messages",
+            config={"configurable": {"thread_id": thread_id}},
         ):
-            # Print each token as it arrives for real-time feedback
-            print(token.content, end="", flush=True)
+            if isinstance(token, AIMessageChunk):
+                # Print each token as it arrives for real-time feedback
+                print(token.content, end="", flush=True)
 
         # Add spacing between responses for better readability
         print("\n")  # Extra newline for visual separation
