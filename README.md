@@ -37,7 +37,7 @@ The application uses a sophisticated RAG pipeline with the following components:
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/r3Vibe/rag-app
 cd rag-app
 ```
 
@@ -76,7 +76,7 @@ docker-compose down
 
 ### 1. Clone and Navigate
 ```bash
-git clone <repository-url>
+git clone https://github.com/r3Vibe/rag-app
 cd rag-app
 ```
 
@@ -114,7 +114,7 @@ HUGGINGFACE_TOKEN=your_actual_huggingface_token_here
 ```bash
 streamlit run display.py
 ```
-Then open `http://localhost:8501` in your browser.
+Then open `http://127.0.0.1:8501` in your browser.
 
 #### Option B: Command Line Interface
 ```bash
@@ -197,14 +197,7 @@ rag-app/
 
 ### Via File System
 1. Place PDF files in the `documents/` directory
-2. Restart the application to reindex the documents
-
-## 🛠️ Development
-
-### Running Tests
-```bash
-# Add your test commands here when tests are implemented
-```
+2. Run `python document_loader.py` to index them
 
 ### Code Structure
 
@@ -250,36 +243,6 @@ rag-app/
 - **RAM**: 16GB or more
 - **Storage**: SSD with 20GB+ free space
 - **GPU**: CUDA-compatible GPU for faster inference (optional)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make your changes and commit: `git commit -am 'Add feature'`
-4. Push to the branch: `git push origin feature-name`
-5. Submit a pull request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 Support
-
-If you encounter any issues or have questions:
-
-1. Check the troubleshooting section above
-2. Review the existing issues in the repository
-3. Create a new issue with detailed information about your problem
-
-## 🔮 Roadmap
-
-- [ ] Support for more document formats (Word, PowerPoint, etc.)
-- [ ] Multiple LLM provider support (OpenAI, Anthropic, etc.)
-- [ ] Advanced query filters and search options
-- [ ] User authentication and document isolation
-- [ ] API endpoints for programmatic access
-- [ ] Performance monitoring and analytics
-
 ---
 
 **Happy RAG-ing! 🚀**
