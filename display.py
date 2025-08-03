@@ -3,7 +3,10 @@ import time
 import streamlit as st
 from langchain_core.messages import AIMessageChunk
 
+from embeddings import init_vectors
 from graph import create_rag_agent
+
+init_vectors()
 
 st.set_page_config(
     page_title="RAG Chat Assistant",

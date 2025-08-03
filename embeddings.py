@@ -73,6 +73,9 @@ def get_vector_store(embeddings):
     return vector_store
 
 
+_global_vector_store = None
+
+
 def load_vector_store():
     """
     Load an existing vector store from local disk storage.
@@ -94,9 +97,23 @@ def load_vector_store():
         This is acceptable for local development but should be used cautiously
         in production environments.
     """
+
+    global _global_vector_store
+
+    if _global_vector_store is not None:
+        return _global_vector_store
+
     vector_store = FAISS.load_local(
         "context_index",  # Directory containing saved index
         get_embeddings(),  # Embeddings model (must match saved version)
         allow_dangerous_deserialization=True,  # Allow pickle deserialization
     )
+    _global_vector_store = vector_store
     return vector_store
+
+
+def init_vectors():
+    """Initialize the global vector store."""
+    global _global_vector_store
+    if _global_vector_store is None:
+        _global_vector_store = load_vector_store()
